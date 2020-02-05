@@ -1,15 +1,15 @@
-package estrategia_evolutiva;
+package es;
 
 import java.util.Arrays;
 
 public class Individual {
 
-	Double[] values;
-	Double[] stepSizes;
-	Double fitness;
+	private Double[] values;
+	private Double[] stepSizes;
+	private Boolean sphereFunction;
 
-	public Individual() {
-
+	public Individual(Boolean sphereFunction) {
+		this.sphereFunction = sphereFunction;
 	}
 
 	public Individual(Double[] values, Double[] stepSizes) {
@@ -23,7 +23,7 @@ public class Individual {
 
 	public void setValues(Double[] values) {
 		this.values = values;
-		this.fitness = displacedSphere();
+		
 	}
 
 	public Double[] getStepSizes() {
@@ -35,7 +35,11 @@ public class Individual {
 	}
 	
 	public Double getFitness() {
-		return fitness;
+		if (sphereFunction)
+			return displacedSphere();
+		else
+			return SchwefelFunction();
+		
 	}
 
 	public Double displacedSphere() {
@@ -47,6 +51,17 @@ public class Individual {
 		}
 
 		return sum;
+	}
+	
+	public Double SchwefelFunction() {
+		Double alpha = 418.9829;
+		double sum = 0;
+		
+		for (Double x : this.values) {
+			sum += ( - x * Math.sin(Math.sqrt(Math.abs(x)))); 
+		}
+		
+		return alpha*Main.numberOfValues+sum;
 	}
 
 	@Override

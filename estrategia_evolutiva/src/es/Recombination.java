@@ -1,14 +1,14 @@
-package estrategia_evolutiva;
+package es;
 
 public class Recombination {
 
 	// Variables
 	public static Individual globalRecombination(Individual parent1, Individual parent2) {
-		Individual child = new Individual();
+		Individual child = new Individual(Main.sphereFunction);
 		Double x;
 		Double y;
 		Double[] z = new Double[Main.numberOfValues];
-		Double[] sigma = new Double[1];
+		Double[] sigma = new Double[parent1.getStepSizes().length];
 
 		// Discreta
 		for (int i = 0; i < Main.numberOfValues; i++) {
@@ -26,11 +26,13 @@ public class Recombination {
 		child.setValues(z);
 
 		// Intermedia
-		double r = Math.random();
-		x = parent1.getStepSizes()[0];
-		y = parent2.getStepSizes()[0];
+		for (int i = 0; i < parent1.getStepSizes().length; i++) {
+			x = parent1.getStepSizes()[i];
+			y = parent2.getStepSizes()[i];
 
-		sigma[0] = (x + y) / 2;
+			sigma[i] = (x + y) / 2;
+		}
+		
 		
 		child.setStepSizes(sigma);
 
