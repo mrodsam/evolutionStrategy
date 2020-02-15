@@ -1,5 +1,7 @@
 package es;
 
+import optimization_es.*;
+
 public class Recombination {
 
 	public static Individual localRecombinationDI(Individual parent1, Individual parent2) {

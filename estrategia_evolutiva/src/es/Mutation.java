@@ -2,15 +2,17 @@ package es;
 
 import java.util.Random;
 
+import optimization_es.*;
+
 public class Mutation {
 
-	static Double epsilon = 0.001;
-	static Double tau;
-	static Double taup;
+	public static Double epsilon = 0.001;
+	public static Double tau = null;
+	public static Double taup = null;
 
 	// Uncorrelated Mutation with One Step Size
 	public static void uncorrelatedMutationWOneStepSize(Individual ind) {
-		tau = 1.0 / Math.sqrt(Main.numberOfValues);
+//		tau = 1.0 / Math.sqrt(Main.numberOfValues);
 		Random r = new Random();
 
 		Double[] currentValues = ind.getValues();
@@ -39,8 +41,8 @@ public class Mutation {
 	
 	public static void uncorrelatedMutationWNStepSizes(Individual ind) {
 		
-		tau = 2.0 / Math.sqrt(2 * Math.sqrt(Main.numberOfValues));
-		taup = 1.0 / Math.sqrt(2 * Main.numberOfValues);
+//		tau = 1.0 / Math.sqrt(2 * Math.sqrt(Main.numberOfValues));
+//		taup = 1.0 / Math.sqrt(2 * Main.numberOfValues);
 		Random r = new Random();
 
 		Double[] currentValues = ind.getValues();

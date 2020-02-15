@@ -2,6 +2,8 @@ package es;
 
 import java.util.LinkedList;
 
+import optimization_es.*;
+
 public class SurvivorSelection {
 
 	public static void muLambda() {
