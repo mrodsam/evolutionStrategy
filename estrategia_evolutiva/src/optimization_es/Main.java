@@ -15,10 +15,14 @@ import es.*;
  */
 public class Main {
 
-	public static Boolean sphereFunction = true; // true: esfera, false: Schwefel
-	public static Boolean oneStep = true; // True:1 paso, False: n pasos
-	public static Boolean selectionSchemeUnion = false; // true:mu+lambda, false:mu,lambda
-	public static Boolean localRecombination = false; // true:local, false:global
+	/* true: esfera, false: Schwefel */
+	public static Boolean sphereFunction = true;
+	/* true: paso único, false: N pasos */
+	public static Boolean oneStep = true;
+	/* true: (mu+lambda), false: (mu,lambda) */
+	public static Boolean selectionSchemeUnion = false;
+	/* true: local, false: global */
+	public static Boolean localRecombination = false;
 
 	public static Integer runs = 20;
 	public static Integer generations = 2000;
