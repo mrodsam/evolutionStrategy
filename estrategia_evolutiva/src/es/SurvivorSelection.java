@@ -4,8 +4,20 @@ import java.util.LinkedList;
 
 import optimization_es.*;
 
+/**
+ * Incluye dos métodos correspondientes a la implementación de los dos esquemas
+ * posibles de selección de supervivientes, $(\mu,\lambda)$ y $(\mu+\lambda)$.
+ * 
+ * @author Marta Rodríguez Sampayo
+ *
+ */
 public class SurvivorSelection {
 
+	/**
+	 * Implementación del esquema de selección de supervivientes (mu,lambda): se
+	 * escogen los mu individuos con mejor valor de adaptación de entre los lambda
+	 * descendientes.
+	 */
 	public static void muLambda() {
 
 		LinkedList<Individual> newPopulation = new LinkedList<Individual>();
@@ -23,12 +35,16 @@ public class SurvivorSelection {
 			newPopulation.add(best);
 			Main.offspring.remove(best);
 		}
-		
-//		newPopulation.forEach(value -> System.out.println(value.getFitness()));
+
 		Main.population = newPopulation;
 
 	}
-	
+
+	/**
+	 * Implementación del esquema de selección de supervivientes (mu+lambda): se
+	 * escogen los mu individuos con mejor valor de adaptación de entre la unión de
+	 * los mu individuos de la población actual y los lambda descendientes.
+	 */
 	public static void muPlusLambda() {
 
 		LinkedList<Individual> newPopulation = new LinkedList<Individual>();
@@ -47,8 +63,7 @@ public class SurvivorSelection {
 			newPopulation.add(best);
 			Main.offspring.remove(best);
 		}
-		
-//		newPopulation.forEach(value -> System.out.println(value.getFitness()));
+
 		Main.population = newPopulation;
 
 	}

@@ -1,6 +1,5 @@
 package optimization_es;
 
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,6 +8,12 @@ import java.nio.file.Paths;
 
 import es.*;
 
+/**
+ * Escritura de los archivos necesarios para evaluar los resultados
+ * 
+ * @author Marta Rodríguez Sampayo
+ *
+ */
 public class FileManagement {
 	/**
 	 * Almacenamiento en un archivo de texto del tiempo que tarda en realizarse cada
@@ -16,7 +21,7 @@ public class FileManagement {
 	 * ejecución.
 	 * 
 	 * @param executionTime Duración de una ejecución
-	 * @param bestFitness       Mejor valor de adaptación al finalizar la ejecución
+	 * @param bestFitness   Mejor valor de adaptación al finalizar la ejecución
 	 */
 	public static void writeTimes(long executionTime, Double bestFitness) {
 		try {
@@ -32,12 +37,14 @@ public class FileManagement {
 	}
 
 	/**
-	 * Almacenamiento en un archivo de texto de la tasa de éxito y el mejor fitness
-	 * promedio. También se incluyen la solución óptima conocida para el problema y
-	 * los parámetros utilizados para la ejecución del algoritmo
+	 * Almacenamiento en un archivo de texto de la tasa de éxito, el mejor fitness
+	 * promedio y el número medio de evaluaciones hasta obtener una solución.
+	 * También se incluyen la solución óptima conocida para el problema y los
+	 * parámetros utilizados para la ejecución del algoritmo
 	 * 
 	 * @param sr  Tasa de éxito
 	 * @param MBF Mejor fitness promedio
+	 * @param aes Número medio de evaluaciones hasta obtener una solución
 	 */
 	public static void writeEvaluationFile(Double sr, Double MBF, Double aes) {
 
@@ -48,30 +55,30 @@ public class FileManagement {
 			pw.print(MBF + "\t");
 			pw.print(aes + "\t");
 			pw.print(Main.getSolution() + "\t");
-			if(Main.sphereFunction) {
+			if (Main.sphereFunction) {
 				pw.print("esfera" + "\t");
-			}else {
+			} else {
 				pw.print("Schwefel" + "\t");
 			}
 			pw.print(Main.populationSize + "\t");
 			pw.print(Main.offspringSize + "\t");
 			pw.print(Main.defaultStepSize + "\t");
-			if(Main.oneStep) {
+			if (Main.oneStep) {
 				pw.print("oneStep" + "\t");
-				pw.print("tau:"+Mutation.tau+ "\t");
-			}else {
+				pw.print("tau:" + Mutation.tau + "\t");
+			} else {
 				pw.print("NSteps" + "\t");
-				pw.print("tau:"+Mutation.tau+ "\t");
-				pw.print("taup:"+Mutation.taup+ "\t");
+				pw.print("tau:" + Mutation.tau + "\t");
+				pw.print("taup:" + Mutation.taup + "\t");
 			}
-			pw.print("epsilon:"+Mutation.epsilon+"\t");
-				
-			if(Main.selectionSchemeUnion) {
+			pw.print("epsilon:" + Mutation.epsilon + "\t");
+
+			if (Main.selectionSchemeUnion) {
 				pw.print("muUnionLambda" + "\n");
-			}else {
+			} else {
 				pw.print("mu,Lambda" + "\n");
 			}
-			
+
 			pw.close();
 		} catch (IOException e) {
 			System.out.println("Error al escribir el archivo de evaluación: " + e.getMessage());

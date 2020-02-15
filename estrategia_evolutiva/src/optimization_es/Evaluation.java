@@ -1,17 +1,20 @@
 package optimization_es;
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+/**
+ * Cálculo de las métricas utilizadas en la evaluación de los resultados.
+ * 
+ * @author Marta Rodríguez Sampayo
+ *
+ */
 public class Evaluation {
 	/**
 	 * Cálculo de la tasa de éxito
 	 * 
-	 * @param optimalSolution Solución obtenida al finalizar la ejecución del
-	 *                        algoritmo
 	 * @return Tasa de éxito
 	 */
 	public static Double computeSuccessRate() {

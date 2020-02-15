@@ -1,11 +1,18 @@
 package optimization_es;
 
-
 import java.util.LinkedList;
 import java.util.Random;
 
 import es.*;
 
+/**
+ * Clase principal donde se encuentran la definición de los valores de los
+ * parámetros del algoritmo y la secuencia de pasos a seguir para la ejecución y
+ * evaluación del mismo.
+ * 
+ * @author Marta Rodríguez Sampayo
+ *
+ */
 public class Main {
 
 	public static Boolean sphereFunction = true; // true: esfera, false: Schwefel
@@ -31,6 +38,11 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		/*
+		 * En caso de no introducir ningún argumento al ejecutar el programa se
+		 * utilizarán los valores por defecto. En otro caso se mostrará un menú en el
+		 * terminal permitiendo realizar una configuración personalizada.
+		 */
 		if (args.length == 1) {
 			Menu.menu();
 		} else {
@@ -48,15 +60,18 @@ public class Main {
 			System.out.println("Tamaño de paso de mutación: " + defaultStepSize);
 			System.out.println("Épsilon: " + Mutation.epsilon);
 		}
-		
+
 		initParams();
 
 		for (int i = 0; i < runs; i++) {
 			System.out.println("Ejecución: " + i);
 			Double solution = null;
 			boolean first = true;
+
 			long tStart = System.currentTimeMillis();
 			initPopulation();
+
+			/* Secuencia de ejecución de la estrategia evolutiva */
 			for (int j = 0; j < generations; j++) {
 				FileManagement.writeProgressCurveValues(getSolution().getFitness(), j, i);
 				generateOffspring();
@@ -81,6 +96,7 @@ public class Main {
 			long tEnd = System.currentTimeMillis();
 			long difference = tEnd - tStart;
 			System.out.println("La ejecución ha durado " + difference / 1000.0 + " segundos.");
+			System.out.println();
 
 			if (solution == null)
 				FileManagement.writeTimes(difference, getSolution().getFitness());
@@ -88,6 +104,7 @@ public class Main {
 				FileManagement.writeTimes(difference, solution);
 
 		}
+		/* Evaluación de los resultados de todas las ejecuciones. */
 		double SR = Evaluation.computeSuccessRate();
 		double MBF = Evaluation.computeMBF();
 		double AES = Evaluation.computeAES();
@@ -100,6 +117,10 @@ public class Main {
 
 	}
 
+	/**
+	 * Método para inicializar los valores de los parámetros de la estrategia
+	 * evolutiva.
+	 */
 	public static void initParams() {
 
 		if (sphereFunction) {
@@ -137,6 +158,10 @@ public class Main {
 
 	}
 
+	/**
+	 * Método para crear de forma aleatoria los individuos que conforman la
+	 * población inicial.
+	 */
 	public static void initPopulation() {
 
 		population = new LinkedList<Individual>();
@@ -155,6 +180,13 @@ public class Main {
 
 	}
 
+	/**
+	 * Método para crear la descendencia.
+	 * 
+	 * En primer lugar se genera un hijo, utilizando el método de recombinación
+	 * elegido. Posteriormente se muta, según el esquema de mutación escogido. Este
+	 * proceso se repite lambda veces.
+	 */
 	public static void generateOffspring() {
 
 		offspring = new LinkedList<Individual>();
@@ -184,11 +216,22 @@ public class Main {
 
 	}
 
+	/**
+	 * Elección aleatoria de un individuo de la población actual para utilizarlo en
+	 * la recombinación.
+	 * 
+	 * @return Individuo padre
+	 */
 	public static Individual getRandomParent() {
 		Random rand = new Random();
 		return population.get(rand.nextInt(population.size()));
 	}
 
+	/**
+	 * Búsqueda del individuo mejor adaptado entre la población actual.
+	 * 
+	 * @return Individuo con el mejor (mínimo) valor de adaptación
+	 */
 	public static Individual getSolution() {
 		int count = 0;
 		Individual best = new Individual(sphereFunction);
@@ -203,6 +246,15 @@ public class Main {
 		return best;
 	}
 
+	/**
+	 * Comparación del valor obtenido en la función objetivo con cierto umbral
+	 * especificado para determinar si se considera una solución válida para el
+	 * problema propuesto.
+	 * 
+	 * @param solution Valor de adaptación del individuo mejor adaptado de la
+	 *                 población actual
+	 * @return true si el valor es una solución o false en caso contrario
+	 */
 	public static boolean isZero(Double solution) {
 		Double threshold = null;
 		if (sphereFunction) {

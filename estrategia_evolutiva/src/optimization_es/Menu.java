@@ -1,10 +1,17 @@
 package optimization_es;
 
-
 import java.util.Scanner;
 
 import es.*;
 
+/**
+ * Implementación del menú que se muestra en el terminal al ejecutar el programa
+ * para seleccionar la función objetivo y la configuración de la estrategia
+ * evolutiva
+ * 
+ * @author Marta Rodríguez Sampayo
+ *
+ */
 public class Menu {
 
 	public static void menu() {
@@ -66,7 +73,7 @@ public class Menu {
 			default:
 				scInput.close();
 				throw new IllegalArgumentException("Unexpected value: " + input);
-				
+
 			}
 		}
 
