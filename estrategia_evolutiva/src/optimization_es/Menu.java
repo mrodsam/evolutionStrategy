@@ -103,8 +103,8 @@ public class Menu {
 		System.out.println("Tamaño de la población: " + Main.populationSize);
 		System.out.println("Número de desciendentes: " + Main.offspringSize);
 		System.out.println("Épsilon: " + Mutation.epsilon);
-		System.out.println("Tau: " + Mutation.tau);
-		System.out.println("Tau': " + Mutation.taup);
+		System.out.println("Tau (calculado posteriormente según el tipo de mutación escogido)");
+		System.out.println("Tau' (calculado posteriormente según el tipo de mutación escogido) ");
 		System.out.println();
 
 		System.out.println(
